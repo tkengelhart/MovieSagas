@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import './App.css';
 
 class App extends Component {
   componentDidMount() {
@@ -10,10 +9,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Empty Page</p>
+        <pre>
+          {JSON.stringify(this.props.movies, null, 2)}
+        </pre>
+        {this.props.movies.map(movie => (
+          <div key={movie.id}>
+            <img src={movie.poster} />
+          </div>
+        ))}
       </div>
     );
   }
 }
 
-export default connect()(App);
+const mapStateToProps = reduxState => reduxState;
+
+export default connect(mapStateToProps)(App);
