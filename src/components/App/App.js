@@ -9,14 +9,39 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <pre>
-          {JSON.stringify(this.props.movies, null, 2)}
-        </pre>
-        {this.props.movies.map(movie => (
+        {this.props.selectedMovieDetails.title ? <div>
+          <div>
+            <button onClick={() => this.props.dispatch({
+              type: 'SET_MOVIE_DETAILS',
+              payload: {}
+            })}>
+              Back
+            </button>
+          </div>
+          <img
+            src={this.props.selectedMovieDetails.poster} 
+            onClick={() => this.props.dispatch({
+              type: 'GET_MOVIE_DETAILS',
+              payload: {movieId: this.props.selectedMovieDetails.id}
+            })}
+          />
+          <h1>{this.props.selectedMovieDetails.title}</h1>
+          <span>{this.props.selectedMovieDetails.description}</span>
+        </div>:
+        this.props.movies.map(movie => (
           <div key={movie.id}>
-            <img src={movie.poster} />
+            <img 
+              src={movie.poster} 
+              onClick={() => this.props.dispatch({
+                type: 'GET_MOVIE_DETAILS',
+                payload: {movieId: movie.id}
+              })}
+            />
           </div>
         ))}
+        {/* <pre>
+          {JSON.stringify(this.props, null, 2)}
+        </pre> */}
       </div>
     );
   }
