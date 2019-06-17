@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Details from '../Details/Details';
 
 class App extends Component {
   componentDidMount() {
