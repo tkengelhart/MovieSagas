@@ -42,3 +42,11 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+CREATE TABLE "movies_genres" (
+  "movie_id" INT REFERENCES "movies",
+  "genre_id" INT REFERENCES "genres"
+);
+
+INSERT INTO "movies_genres" ("movie_id", "genre_id")
+VALUES (1,1), (1,2), (2,2), (2,4), (3,2), (5,4);
