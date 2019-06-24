@@ -33,7 +33,9 @@ Genres can be applied to many different movies. Movies can have multiple genres.
 
 ## Feature List
 
-> NOTE: Start by taking inventory of the existing code. Part of the work for setting up sagas has been done for you.
+Start by taking inventory of the existing code. Part of the work for setting up sagas has been done for you.
+
+By the time you have completed your work, all `axios` requests should be made from sagas.
 
 ### Home / List Page
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/App/App.js';
-import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
@@ -28,11 +26,13 @@ const movies = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
-const genres = (state = [], action) => {
+// Used to store the details for a specific movie
+const movieDetails = (state = {}, action) => {
     switch (action.type) {
-        case 'SET_TAGS':
+        case 'SET_MOVIE_DETAILS':
             return action.payload;
+        case 'SET_MOVIE_GENRE_DETAILS':
+            return { ...state, genres: action.payload }
         default:
             return state;
     }
@@ -42,7 +42,7 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         movies,
-        genres,
+        movieDetails,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -53,4 +53,3 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
     document.getElementById('root'));
-registerServiceWorker();
