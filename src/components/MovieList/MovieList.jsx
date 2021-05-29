@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { Card, CardColumns } from 'react-bootstrap';
+
 import './MovieList.css'
 
 function MovieList() {
@@ -12,21 +15,25 @@ function MovieList() {
     }, []);
 
     return (
-        <main>
+        <div>
             <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title}/>
-                        </div>
-                    );
-                })}
-            </section>
-        </main>
 
+            <CardColumns >
+                <Card style={{ width: '18rem' }}>
+
+                    {movies.map(movie => {
+                        return (
+                            <Card key={movie.id} >
+                                <h3>{movie.title}</h3>
+                                <Card.Img src={movie.poster} alt={movie.title} />
+                            </Card>
+                        );
+                    })}
+                </Card>
+            </CardColumns >
+        </div>
     );
 }
-
 export default MovieList;
+
+
