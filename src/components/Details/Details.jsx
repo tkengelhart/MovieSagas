@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { CardColumns, Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-
+import '../App/App.css';
 
 function Details() {
 
     const movieList = useSelector(store => store.movies);
     const genreList = useSelector(store => store.genres)
-    const details = useSelector(store => store.detailsReducer);
+    // const details = useSelector(store => store.detailsReducer);
 
     const history = useHistory();
 
@@ -35,17 +35,15 @@ function Details() {
 
 
     return (
-        <CardColumns>
-            <Card>
-                <Card.Header>Movie Details</Card.Header>
-                <Card.Title>Movie Title: {movie.title}</Card.Title>
-                <Card.Body>Description: {movie.description}</Card.Body>
-                {/* <Card.Body>Genres: {genre.name}</Card.Body> */}
-                <Card.Footer>{movie.id}</Card.Footer>
+        <Card className="center-card" style={{ width: '50rem' }} border="light">
+            <Card.Header>Movie Details</Card.Header>
+            <Card.Title>Movie Title: {movie.title}</Card.Title>
+            <Card.Body>Description: {movie.description}</Card.Body>
+            <Card.Body>Genres: {movie.genre}</Card.Body>
+            <Card.Footer>{movie.id}</Card.Footer>
 
-                <Button onClick={(event) => backButton()}>Back to Movies</Button>
-            </Card>
-        </CardColumns>
+            <Button onClick={(event) => backButton()}>Back to Movies</Button>
+        </Card>
 
     );
 }

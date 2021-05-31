@@ -34,15 +34,15 @@ const genres = (state = [], action) => {
 }
 //example from bookList
 
-const detailsReducer = (state = {}, action) => {
-    // Manages what movie we want to load into the moviedetails page.
-    if (action.type === 'SET_DETAILS') {
-        return action.payload;
-    } else if (action.type === 'CLEAR_DETAILS') {
-        return {} // clears the state back to an empty object
-    }
-    return state;
-}
+// const detailsReducer = (state = {}, action) => {
+//     // Manages what movie we want to load into the moviedetails page.
+//     if (action.type === 'SET_DETAILS') {
+//         return action.payload;
+//     } else if (action.type === 'CLEAR_DETAILS') {
+//         return {} // clears the state back to an empty object
+//     }
+//     return state;
+// }
 
 //sagas
 
@@ -57,6 +57,7 @@ function* fetchAllMovies() {
         console.log('get all error');
     }
 }
+
 
 function* addMovie(action) {
     try {
@@ -87,7 +88,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        detailsReducer
+        // detailsReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

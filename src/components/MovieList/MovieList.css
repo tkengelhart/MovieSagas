@@ -8,4 +8,16 @@ Card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 33%;
+}
+.columns {
+    display: flex;
+    flex-direction: row;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: black;
+    flex-flow: wrap;
+    flex-wrap: wrap;
+    position: static;
+
 }

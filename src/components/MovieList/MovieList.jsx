@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, CardDeck, CardGroup } from 'react-bootstrap';
+import { Button, CardDeck, CardGroup, Row } from 'react-bootstrap';
 import { Card, CardColumns } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css'
@@ -11,9 +11,9 @@ function MovieList() {
     const movies = useSelector(store => store.movies);
     // const currentMovie = useSelector(store => store.movies);
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_MOVIES' });
-    }, []);
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_MOVIES' });
+    // }, []);
 
     const setMovieDetails = (movie) => {
         dispatch({
@@ -34,32 +34,22 @@ function MovieList() {
 
     return (
         <div>
-            <h1>MovieList</h1>
+            <h1>Movie List</h1>
             {/* Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'} */}
 
-            <CardGroup class="row-cols-3" style={{ width: '20rem' }} >
-
-                <Card border="light" style={{ width: '15rem' }}>
-
-                    {movies.map(movie => {
-                        return (
-                            <Card key={movie.id} >
-
-                                <Card.Header>{movie.title}</Card.Header>
-
-                                <Card.Img src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></Card.Img>
-                                <br></br>
-                                <br></br>
+            {movies.map(movie => {
+                return (
+                    <Card key={movie.id} className="columns" style={{ width: '20rem' }} border="light" >
+                        {/* <Card border="light" style={{ width: '15rem' }}> */}
+                        <Card.Header>{movie.title}</Card.Header>
+                        <Card.Img src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></Card.Img>
+                        <br></br>
+                        <br></br>
+                    </Card>
 
 
-                            </Card>
-
-                        );
-                    })}
-
-                </Card>
-
-            </CardGroup >
+                );
+            })}
 
         </div >
     );

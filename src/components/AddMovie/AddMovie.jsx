@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { Dropdown, Form, FormText } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { useState } from 'react'; import React from 'react';
 
@@ -20,8 +19,17 @@ function AddMovie() {
 
         dispatch({
             type: 'ADD_MOVIE',
-            payload: { movie: movie.title, url: movie.poster, description: movie.description }
+            payload: {
+                title: title,
+                url: url,
+                description: description,
+                genre: genre
+
+            }
         });
+        history.push("/")
+
+
     }
 
     const cancelButton = event => {
@@ -29,59 +37,78 @@ function AddMovie() {
     }
 
     return (
+        <>
 
-        <h2>Nothing here yet</h2>
-        // <Form>
-        //     <FormText onSubmit={handleSubmit}>
-        //         <input
-        //             required
-        //             type="text"
-        //             placeholder="Movie Title"
-        //             value={movie}
-        //             onChange={(event) => setTitle(event.target.value)}>
-        //         </input>
+            <form onSubmit={handleSubmit}>
+                <input
+                    required
+                    type="text"
+                    placeholder="Movie Title"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}>
+                </input>
 
-        //         <input
-        //             required
-        //             type="url"
-        //             placeholder="Movie Poster URL"
-        //             value={movieUrl}
-        //             onChange={(event) => setUrl(event.target.value)}>
-        //         </input>
+                <br></br>
+                <br></br>
 
-        //         <textarea
-        //             required
-        //             type="text"
-        //             placeholder="Movie Description"
-        //             value={description}
-        //             onChange={(event) => setDescription(event.target.value)}>
-        //         </textarea>
 
-        //         <Dropdown
-        //             required
-        //             onChange={(event) => setGenre(event.target.value)}>
-        //             <option value={''}></option>
-        //             <option value={'Adventure'}>Adventure</option>
-        //             <option value={'Animated'}>Animated</option>
-        //             <option value={'Biographical'}>Biographical</option>
-        //             <option value={'Comedy'}>Comedy</option>
-        //             <option value={'Disaster'}>Disaster</option>
-        //             <option value={'Drama'}>Drama</option>
-        //             <option value={'Epic'}>Epic</option>
-        //             <option value={'Fantasy'}>Fantasy</option>
-        //             <option value={'Musical'}>Musical</option>
-        //             <option value={'Romantic'}>Romantic</option>
-        //             <option value={'Science Fiction'}>Science Fiction</option>
-        //             <option value={'Space-Opera'}>Space-Opera</option>
-        //             <option value={'Superhero'}>Superhero</option>
+                <input
+                    required
+                    type="url"
+                    placeholder="Movie Poster URL"
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}>
+                </input>
 
-        //         </Dropdown>
-        //     </FormText >
+                <br></br>
+                <br></br>
 
-        //     <button onClick={(event) => cancelButton(event)}>Cancel</button>
-        //     <button type="submit">Add Movie</button>
-        // </Form>
+                <textarea
+                    required
+                    type="text"
+                    placeholder="Movie Description"
+                    value={description}
+                    rows="5"
+                    columns="5"
+                    onChange={(event) => setDescription(event.target.value)}>
+                </textarea>
+
+                <br></br>
+                <br></br>
+
+                <select
+                    required
+                    onChange={(event) => setGenre(event.target.value)}>
+                    <option value={''}></option>
+                    <option value={'Adventure'}>Adventure</option>
+                    <option value={'Animated'}>Animated</option>
+                    <option value={'Biographical'}>Biographical</option>
+                    <option value={'Comedy'}>Comedy</option>
+                    <option value={'Disaster'}>Disaster</option>
+                    <option value={'Drama'}>Drama</option>
+                    <option value={'Epic'}>Epic</option>
+                    <option value={'Fantasy'}>Fantasy</option>
+                    <option value={'Musical'}>Musical</option>
+                    <option value={'Romantic'}>Romantic</option>
+                    <option value={'Science Fiction'}>Science Fiction</option>
+                    <option value={'Space-Opera'}>Space-Opera</option>
+                    <option value={'Superhero'}>Superhero</option>
+
+                </select>
+
+                <br></br>
+                <br></br>
+
+                <button type="submit">Save Movie</button>
+
+                <br></br>
+                <br></br>
+            </form >
+            <button onClick={(event) => cancelButton(event)}>Cancel</button>
+
+        </>
     );
+
 }
 
 export default AddMovie;
