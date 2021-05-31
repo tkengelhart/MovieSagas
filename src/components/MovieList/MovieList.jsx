@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, CardDeck, CardGroup, Row } from 'react-bootstrap';
-import { Card, CardColumns } from 'react-bootstrap';
+import { Card, CardColumns, CardDeck, CardGroup, CardImg } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import './MovieList.css'
+import './MovieList.css';
 
 function MovieList() {
     const dispatch = useDispatch();
@@ -29,29 +28,36 @@ function MovieList() {
             payload: genre,
         });
     }
+    //trying something from stack overflow
+    const sampleStyle = {
+        minWidth: "30%",
+        flexGrow: 0,
+    };
 
 
 
     return (
-        <div>
-            <h1>Movie List</h1>
-            {/* Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'} */}
 
+        <CardGroup style={sampleStyle} className="card-style">
             {movies.map(movie => {
                 return (
-                    <Card key={movie.id} className="columns" style={{ width: '20rem' }} border="light" >
-                        {/* <Card border="light" style={{ width: '15rem' }}> */}
-                        <Card.Header>{movie.title}</Card.Header>
-                        <Card.Img src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></Card.Img>
+                    <Card key={movie.id} style={sampleStyle} border="light" className="card-style">
+
+                        <Card.Title >{movie.title}</Card.Title>
+
+                        <CardImg src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></CardImg>
+
                         <br></br>
                         <br></br>
+
                     </Card>
 
 
                 );
-            })}
+            })
+            }
+        </CardGroup>
 
-        </div >
     );
 }
 export default MovieList;

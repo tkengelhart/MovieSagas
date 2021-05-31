@@ -40,7 +40,7 @@ function Details() {
             <Card.Title>Movie Title: {movie.title}</Card.Title>
             <Card.Body>Description: {movie.description}</Card.Body>
             <Card.Body>Genres: {movie.genre}</Card.Body>
-            <Card.Footer>{movie.id}</Card.Footer>
+            <Card.Footer>Movie ID: {movie.id}</Card.Footer>
 
             <Button onClick={(event) => backButton()}>Back to Movies</Button>
         </Card>
