@@ -10,18 +10,18 @@ function AddMovie() {
     const [genre, setGenre] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [url, setUrl] = useState('');
+    const [poster, setPoster] = useState('');
 
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(`Adding movie`, { title, url, description, genre });
+        console.log(`Adding movie`, { title, poster, description, genre });
 
         dispatch({
             type: 'ADD_MOVIE',
             payload: {
                 title: title,
-                url: url,
+                poster: poster,
                 description: description,
                 genre: genre
 
@@ -54,10 +54,10 @@ function AddMovie() {
 
                 <input
                     required
-                    type="url"
+                    type="text"
                     placeholder="Movie Poster URL"
-                    value={url}
-                    onChange={(event) => setUrl(event.target.value)}>
+                    value={poster}
+                    onChange={(event) => setPoster(event.target.value)}>
                 </input>
 
                 <br></br>

@@ -61,7 +61,7 @@ function* fetchAllMovies() {
 
 function* addMovie(action) {
     try {
-        yield axios.post('/', action.payload);
+        yield axios.post('/api/movie', action.payload);
         yield put({ type: 'FETCH_MOVIES' });
     } catch (error) {
         console.log(`Error fetching movies`, error);
