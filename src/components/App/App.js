@@ -1,9 +1,10 @@
 import { HashRouter as Router, Route } from 'react-router-dom';
+import { NavbarBrand } from 'react-bootstrap';
+
 import './App.css';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
-import AddMovie from '../AddMovie/AddMovie';
-import { NavbarBrand } from 'react-bootstrap';
+import AddMovie from '../AddMovie/AddMovie.jsx';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -12,9 +13,6 @@ function App() {
   console.log('App is rendering');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_MOVIES' })
-  }, []);
 
   return (
     <div className="App">
@@ -23,13 +21,13 @@ function App() {
       <NavbarBrand href="/addmovie">Add Movie</NavbarBrand>
 
       <Router>
-        <Route path="/" exact>
+        <Route exact path="/">
           <MovieList />
         </Route>
         <Route path="/details/:movieId">
           <Details />
         </Route>
-        <Route path="/addmovie" exact>
+        <Route exact path="/addmovie">
           <AddMovie />
         </Route>
       </Router>

@@ -1,9 +1,8 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import { Dropdown, FormText } from 'react-bootstrap';
 import { useHistory } from 'react-router';
-import { useState } from 'react';
+import { useState } from 'react'; import React from 'react';
+
 
 
 function AddMovie(props) {
@@ -22,7 +21,7 @@ function AddMovie(props) {
 
         dispatch({
             type: 'ADD_MOVIE',
-            payload: { movie: movieTitle, url: movieUrl, description: movieDescription }
+            payload: { movie: movie.title, url: movie.poster, description: movie.description }
         });
     }
 

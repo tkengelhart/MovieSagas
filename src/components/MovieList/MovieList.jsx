@@ -9,7 +9,11 @@ function MovieList() {
     const dispatch = useDispatch();
     const history = useHistory();
     const movies = useSelector(store => store.movies);
-    const currentMovie = useSelector(store => store.movies);
+    // const currentMovie = useSelector(store => store.movies);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MOVIES' });
+    }, []);
 
     const setMovieDetails = (movie) => {
         dispatch({
@@ -26,14 +30,12 @@ function MovieList() {
         });
     }
 
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_MOVIES' });
-    // }, []);
+
 
     return (
         <div>
             <h1>MovieList</h1>
-            Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'}
+            {/* Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'} */}
 
             <CardGroup style={{ width: '20rem' }} >
 
