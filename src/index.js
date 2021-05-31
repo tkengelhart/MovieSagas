@@ -34,15 +34,15 @@ const genres = (state = [], action) => {
 }
 //example from bookList
 
-// const detailsReducer = (state = {}, action) => {
-//     // Manages what movie we want to load into the moviedetails page.
-//     if (action.type === 'SET_DETAILS') {
-//         return action.payload;
-//     } else if (action.type === 'CLEAR_DETAILS') {
-//         return {} // clears the state back to an empty object
-//     }
-//     return state;
-// }
+const detailsReducer = (state = {}, action) => {
+    // Manages what movie we want to load into the moviedetails page.
+    if (action.type === 'SET_DETAILS') {
+        return action.payload;
+    } else if (action.type === 'CLEAR_DETAILS') {
+        return {} // clears the state back to an empty object
+    }
+    return state;
+}
 
 //sagas
 
@@ -52,6 +52,18 @@ function* fetchAllMovies() {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
+
+    } catch {
+        console.log('get all error');
+    }
+}
+
+function* fetchDetails() {
+    // get all genres from the DB
+    try {
+        const details = yield axios.get(`api/genre/${action.payload}`);
+        console.log('get all:', movies_genres.data);
+        yield put({ type: 'SET_DETAILS', payload: movies_genres.data });
 
     } catch {
         console.log('get all error');
@@ -72,6 +84,7 @@ function* addMovie(action) {
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('FETCH_DETAILS', fetchDetails);
 }
 
 
@@ -88,7 +101,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        // detailsReducer
+        detailsReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

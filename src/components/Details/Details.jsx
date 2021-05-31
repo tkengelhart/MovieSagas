@@ -9,7 +9,7 @@ function Details() {
 
     const movieList = useSelector(store => store.movies);
     const genreList = useSelector(store => store.genres)
-    // const details = useSelector(store => store.detailsReducer);
+    const details = useSelector(store => store.detailsReducer);
 
     const history = useHistory();
 
@@ -19,15 +19,17 @@ function Details() {
     let movieId = params.movieId; // :id is set up in App.js
     let genreId = params.genreId
 
+
     let movie = movieList.find(movie => movie.id === Number(movieId));
+    console.log(params.movieId);
     console.log(`found movie: `, movie);
 
-    let genre = genreList.find(genre => genre.id === Number(genreId));
-    console.log('found genre', genreId);
+
 
     if (!movie) {
         return <h2>Invalid movie ID</h2>;
     }
+
 
     const backButton = (event) => {
         history.push('/');
@@ -37,9 +39,10 @@ function Details() {
     return (
         <Card className="center-card" style={{ width: '50rem' }} border="light">
             <Card.Header>Movie Details</Card.Header>
+            <br></br>
             <Card.Title>Movie Title: {movie.title}</Card.Title>
             <Card.Body>Description: {movie.description}</Card.Body>
-            <Card.Body>Genres: {movie.genre}</Card.Body>
+            <Card.Body>Genres: {details.genre}</Card.Body>
             <Card.Footer>Movie ID: {movie.id}</Card.Footer>
 
             <Button onClick={(event) => backButton()}>Back to Movies</Button>
