@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -19,6 +19,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -56,6 +57,25 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+
+const detailsReducer = (state = {}, action) => {
+    // Manages what movie we want to load into the moviedetails page.
+    if (action.type === 'SET_DETAILS') {
+        return action.payload;
+    } else if (action.type === 'CLEAR_DETAILS') {
+        return {} // clears the state back to an empty object
+    }
+    return state;
+}
+function* addMovie(action) {
+    try {
+        yield axios.post('/', action.payload);
+        yield put({ type: 'FETCH_MOVIES' });
+    } catch (error) {
+        console.log(`Error fetching movies`, error);
+    }
+}
+
 
 // Create one store that all components can use
 const storeInstance = createStore(

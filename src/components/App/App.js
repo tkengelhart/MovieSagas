@@ -17,14 +17,14 @@ function App() {
         <Route path="/" exact>
           <MovieList />
         </Route>
-        <Route path="/details" exact>
+        <Route path="/details/:movieId">
           <Details />
         </Route>
         <Route path="/add" exact>
           <AddMovie />
         </Route>
       </Router>
-    </div>
+    </div >
   );
 }
 

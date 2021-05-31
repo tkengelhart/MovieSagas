@@ -4,11 +4,15 @@ import axios from 'axios';
 import { Dropdown } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-function AddMovie() {
+function AddMovie(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [genre, setGenre] = useState('');
 
-    const addMovie = (movie) => {
+    const addMovie = (event) => {
+        event.preventDefault();
+        console.log(`Adding movie`, { title, description });
+
         dispatch({
             type: 'ADD_MOVIE',
             payload: { movie: movieTitle, url: movieUrl, description: movieDescription }

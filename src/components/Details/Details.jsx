@@ -1,40 +1,36 @@
-import { Card } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 
 function Details() {
-    const movie = useSelector(store => store.movies);
-    const dispatch = useDispatch();
-    const history = useHistory();
 
 
-    const setMovieDetails = (movie) => {
+    let movies = useSelector(store => store.movies);
 
-        dispatch({
-            type: 'SET_DETAILS',
-            payload: movie,
-        });
+    let params = useParams();
+    console.log(params);
 
-        history.push('/details');
+    let movieId = params.movieId; // :id is set up in App.js
+    let movie = movies.find(movie => movie.id === Number(movieId));
+    console.log(`found movie: `, movie);
+
+    if (!movie) {
+        return <h2>Invalid movie ID</h2>;
     }
 
     return (
-        <section>
-            <h2>All Movies</h2>
+        <>
+            <div>
+                <h1>Movie Details</h1>
 
-      Current Movie: {movie.title ? movie.title : 'None Selected'}
-            <ul>
-                {movie.map((item, index) =>
-                    <li key={index}>{item.title}
+                <h2>Movie Title:</h2>
+                <h2>{movie.title}</h2>
 
-                        <button onClick={() => setMovieDetails(movie)}>View Details</button>
+                <p>Description:</p>
+                <p>{movie.description}</p>
 
-                        <button onClick={() => history.push(`/details/${item.id}`)}>View Details 2</button>
-                    </li>
-                )}
-            </ul>
-
-        </section>
+            </div>
+        </>
     );
 }
 
