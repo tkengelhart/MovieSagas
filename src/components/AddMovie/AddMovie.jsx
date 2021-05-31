@@ -4,8 +4,7 @@ import { useHistory } from 'react-router';
 import { useState } from 'react'; import React from 'react';
 
 
-
-function MovieForm() {
+function AddMovie() {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -30,57 +29,59 @@ function MovieForm() {
     }
 
     return (
-        <Form>
-            <FormText onSubmit={handleSubmit}>
-                <input
-                    required
-                    type="text"
-                    placeholder="Movie Title"
-                    value={movie}
-                    onChange={(event) => setTitle(event.target.value)}>
-                </input>
 
-                <input
-                    required
-                    type="url"
-                    placeholder="Movie Poster URL"
-                    value={movieUrl}
-                    onChange={(event) => setUrl(event.target.value)}>
-                </input>
+        <h2>Nothing here yet</h2>
+        // <Form>
+        //     <FormText onSubmit={handleSubmit}>
+        //         <input
+        //             required
+        //             type="text"
+        //             placeholder="Movie Title"
+        //             value={movie}
+        //             onChange={(event) => setTitle(event.target.value)}>
+        //         </input>
 
-                <textarea
-                    required
-                    type="text"
-                    placeholder="Movie Description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}>
-                </textarea>
+        //         <input
+        //             required
+        //             type="url"
+        //             placeholder="Movie Poster URL"
+        //             value={movieUrl}
+        //             onChange={(event) => setUrl(event.target.value)}>
+        //         </input>
 
-                <Dropdown
-                    required
-                    onChange={(event) => setGenre(event.target.value)}>
-                    <option value={''}></option>
-                    <option value={'Adventure'}>Adventure</option>
-                    <option value={'Animated'}>Animated</option>
-                    <option value={'Biographical'}>Biographical</option>
-                    <option value={'Comedy'}>Comedy</option>
-                    <option value={'Disaster'}>Disaster</option>
-                    <option value={'Drama'}>Drama</option>
-                    <option value={'Epic'}>Epic</option>
-                    <option value={'Fantasy'}>Fantasy</option>
-                    <option value={'Musical'}>Musical</option>
-                    <option value={'Romantic'}>Romantic</option>
-                    <option value={'Science Fiction'}>Science Fiction</option>
-                    <option value={'Space-Opera'}>Space-Opera</option>
-                    <option value={'Superhero'}>Superhero</option>
+        //         <textarea
+        //             required
+        //             type="text"
+        //             placeholder="Movie Description"
+        //             value={description}
+        //             onChange={(event) => setDescription(event.target.value)}>
+        //         </textarea>
 
-                </Dropdown>
-            </FormText >
+        //         <Dropdown
+        //             required
+        //             onChange={(event) => setGenre(event.target.value)}>
+        //             <option value={''}></option>
+        //             <option value={'Adventure'}>Adventure</option>
+        //             <option value={'Animated'}>Animated</option>
+        //             <option value={'Biographical'}>Biographical</option>
+        //             <option value={'Comedy'}>Comedy</option>
+        //             <option value={'Disaster'}>Disaster</option>
+        //             <option value={'Drama'}>Drama</option>
+        //             <option value={'Epic'}>Epic</option>
+        //             <option value={'Fantasy'}>Fantasy</option>
+        //             <option value={'Musical'}>Musical</option>
+        //             <option value={'Romantic'}>Romantic</option>
+        //             <option value={'Science Fiction'}>Science Fiction</option>
+        //             <option value={'Space-Opera'}>Space-Opera</option>
+        //             <option value={'Superhero'}>Superhero</option>
 
-            <button onClick={(event) => cancelButton(event)}>Cancel</button>
-            <button type="submit">Add Movie</button>
-        </Form>
-    )
+        //         </Dropdown>
+        //     </FormText >
+
+        //     <button onClick={(event) => cancelButton(event)}>Cancel</button>
+        //     <button type="submit">Add Movie</button>
+        // </Form>
+    );
 }
 
-export default MovieForm;
+export default AddMovie;
