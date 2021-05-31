@@ -16,6 +16,8 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
 
+
+
   }, []);
 
 
