@@ -22,4 +22,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
+Cardgroup, .row-cols-3 {
+  display: flex;
+  flex-direction: row;
+}

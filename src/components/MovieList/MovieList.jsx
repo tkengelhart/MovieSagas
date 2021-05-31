@@ -37,9 +37,9 @@ function MovieList() {
             <h1>MovieList</h1>
             {/* Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'} */}
 
-            <CardGroup style={{ width: '20rem' }} >
+            <CardGroup class="row-cols-3" style={{ width: '20rem' }} >
 
-                <Card border="light" style={{ width: '20rem' }}>
+                <Card border="light" style={{ width: '15rem' }}>
 
                     {movies.map(movie => {
                         return (
@@ -48,9 +48,12 @@ function MovieList() {
                                 <Card.Header>{movie.title}</Card.Header>
 
                                 <Card.Img src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></Card.Img>
+                                <br></br>
+                                <br></br>
 
 
                             </Card>
+
                         );
                     })}
 

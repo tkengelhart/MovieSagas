@@ -7,6 +7,7 @@ import Details from '../Details/Details';
 import AddMovie from '../AddMovie/AddMovie.jsx';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import MovieForm from '../AddMovie/AddMovie.jsx';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
           <Details />
         </Route>
         <Route exact path="/addmovie">
-          <AddMovie />
+          <MovieForm />
         </Route>
       </Router>
     </div >

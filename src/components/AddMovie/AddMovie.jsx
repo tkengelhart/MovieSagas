@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { Dropdown, FormText } from 'react-bootstrap';
+import { Dropdown, Form, FormText } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { useState } from 'react'; import React from 'react';
 
 
 
-function AddMovie(props) {
+function MovieForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -30,7 +30,7 @@ function AddMovie(props) {
     }
 
     return (
-        <div>
+        <Form>
             <FormText onSubmit={handleSubmit}>
                 <input
                     required
@@ -79,8 +79,8 @@ function AddMovie(props) {
 
             <button onClick={(event) => cancelButton(event)}>Cancel</button>
             <button type="submit">Add Movie</button>
-        </div >
+        </Form>
     )
 }
 
-export default AddMovie;
+export default MovieForm;
