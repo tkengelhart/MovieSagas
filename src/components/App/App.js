@@ -15,8 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
-
-
+    dispatch({ type: 'FETCH_GENRES' });
 
   }, []);
 
