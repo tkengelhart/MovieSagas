@@ -1,17 +1,24 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, FormText } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import { useState } from 'react';
+
 
 function AddMovie(props) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [genre, setGenre] = useState('');
 
-    const addMovie = (event) => {
+    const [genre, setGenre] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [url, setUrl] = useState('');
+
+
+    const handleSubmit = event => {
         event.preventDefault();
-        console.log(`Adding movie`, { title, description });
+        console.log(`Adding movie`, { title, url, description, genre });
 
         dispatch({
             type: 'ADD_MOVIE',
@@ -19,20 +26,37 @@ function AddMovie(props) {
         });
     }
 
-    const cancelButton = (event) => {
+    const cancelButton = event => {
         history.push("/")
     }
 
-    // Displays the fruit selection buttons on the DOM
     return (
         <div>
-            <form onSubmit={(event) => feelingResponse(event)}>
-                <input type="text" placeholder="Movie Title" value="movie">
+            <FormText onSubmit={handleSubmit}>
+                <input
+                    required
+                    type="text"
+                    placeholder="Movie Title"
+                    value={movie}
+                    onChange={(event) => setTitle(event.target.value)}>
                 </input>
-                <input type="url" placeholder="Movie Poster URL" value="movieUrl">
+
+                <input
+                    required
+                    type="url"
+                    placeholder="Movie Poster URL"
+                    value={movieUrl}
+                    onChange={(event) => setUrl(event.target.value)}>
                 </input>
-                <textarea type="text" placeholder="Movie Description" value="description">
+
+                <textarea
+                    required
+                    type="text"
+                    placeholder="Movie Description"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}>
                 </textarea>
+
                 <Dropdown
                     required
                     onChange={(event) => setGenre(event.target.value)}>
@@ -52,11 +76,11 @@ function AddMovie(props) {
                     <option value={'Superhero'}>Superhero</option>
 
                 </Dropdown>
-            </form >
+            </FormText >
 
             <button onClick={(event) => cancelButton(event)}>Cancel</button>
-            <button onClick={(event) => addMovie(event.target.value)}>Save</button>
-        </div>
+            <button type="submit">Add Movie</button>
+        </div >
     )
 }
 

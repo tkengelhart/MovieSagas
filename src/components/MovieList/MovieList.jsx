@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
+import { Button, CardDeck, CardGroup } from 'react-bootstrap';
 import { Card, CardColumns } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-
 import './MovieList.css'
-import Details from '../Details/Details';
 
 function MovieList() {
     const dispatch = useDispatch();
@@ -21,6 +19,13 @@ function MovieList() {
         history.push(`/details/${movie.id}`);
     }
 
+    const setMovieGenre = (genre) => {
+        dispatch({
+            type: 'SET_GENRES',
+            payload: genre,
+        });
+    }
+
     // useEffect(() => {
     //     dispatch({ type: 'FETCH_MOVIES' });
     // }, []);
@@ -30,26 +35,28 @@ function MovieList() {
             <h1>MovieList</h1>
             Current Movie: {currentMovie.title ? currentMovie.title : 'None Selected'}
 
-            <CardColumns >
-                <Card style={{ width: '18rem' }}>
+            <CardGroup style={{ width: '20rem' }} >
+
+                <Card border="light" style={{ width: '20rem' }}>
 
                     {movies.map(movie => {
                         return (
                             <Card key={movie.id} >
 
-                                <h3>{movie.title}</h3>
+                                <Card.Header>{movie.title}</Card.Header>
 
                                 <Card.Img src={movie.poster} alt={movie.title} onClick={() => setMovieDetails(movie)}></Card.Img>
 
-                                {/* <Button onClick={() => history.push(`/details/${movie.id}`)}>View Details 2</Button> */}
 
                             </Card>
                         );
                     })}
-                </Card>
-            </CardColumns >
 
-        </div>
+                </Card>
+
+            </CardGroup >
+
+        </div >
     );
 }
 export default MovieList;

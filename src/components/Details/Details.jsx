@@ -7,12 +7,11 @@ import { Button } from 'react-bootstrap';
 
 function Details() {
 
-    const history = useHistory();
-
-
     const movieList = useSelector(store => store.movies);
     const genreList = useSelector(store => store.genres)
     const details = useSelector(store => store.detailsReducer);
+
+    const history = useHistory();
 
     let params = useParams();
     console.log(params);

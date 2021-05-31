@@ -1,4 +1,11 @@
 .movies {
     display : flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+Card {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 }
