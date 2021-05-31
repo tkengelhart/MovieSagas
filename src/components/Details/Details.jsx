@@ -1,36 +1,53 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import { CardColumns, Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 
 function Details() {
 
+    const history = useHistory();
 
-    let movies = useSelector(store => store.movies);
+
+    const movieList = useSelector(store => store.movies);
+    const genreList = useSelector(store => store.genres)
+    const details = useSelector(store => store.detailsReducer);
 
     let params = useParams();
     console.log(params);
 
     let movieId = params.movieId; // :id is set up in App.js
-    let movie = movies.find(movie => movie.id === Number(movieId));
+    let genreId = params.genreId
+
+    let movie = movieList.find(movie => movie.id === Number(movieId));
     console.log(`found movie: `, movie);
+
+    let genre = genreList.find(genre => genre.id === Number(genreId));
+    console.log('found genre', genreId);
 
     if (!movie) {
         return <h2>Invalid movie ID</h2>;
     }
 
+    const backButton = (event) => {
+        history.push('/');
+    };
+
+
     return (
-        <>
-            <div>
-                <h1>Movie Details</h1>
+        <CardColumns>
+            <Card>
+                <Card.Header>Movie Details</Card.Header>
+                <Card.Title>Movie Title: {movie.title}</Card.Title>
+                <Card.Body>Description: {movie.description}</Card.Body>
+                {/* <Card.Body>Genres: {genre.name}</Card.Body> */}
+                <Card.Footer>{movie.id}</Card.Footer>
 
-                <h2>Movie Title:</h2>
-                <h2>{movie.title}</h2>
+                <Button onClick={(event) => backButton()}>Back to Movies</Button>
+            </Card>
+        </CardColumns>
 
-                <p>Description:</p>
-                <p>{movie.description}</p>
-
-            </div>
-        </>
     );
 }
 

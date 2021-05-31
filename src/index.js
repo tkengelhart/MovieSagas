@@ -1,7 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import $ from 'jquery';
-// import Popper from 'popper.js';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -14,29 +10,8 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-
-
-// Create the rootSaga generator function
-function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('ADD_MOVIE', addMovie);
-}
-
-function* fetchAllMovies() {
-    // get all movies from the DB
-    try {
-        const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
-
-    } catch {
-        console.log('get all error');
-    }
-
-}
-
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -57,6 +32,7 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+//example from bookList
 
 const detailsReducer = (state = {}, action) => {
     // Manages what movie we want to load into the moviedetails page.
@@ -67,6 +43,21 @@ const detailsReducer = (state = {}, action) => {
     }
     return state;
 }
+
+//sagas
+
+function* fetchAllMovies() {
+    // get all movies from the DB
+    try {
+        const movies = yield axios.get('/api/movie');
+        console.log('get all:', movies.data);
+        yield put({ type: 'SET_MOVIES', payload: movies.data });
+
+    } catch {
+        console.log('get all error');
+    }
+}
+
 function* addMovie(action) {
     try {
         yield axios.post('/', action.payload);
@@ -76,12 +67,27 @@ function* addMovie(action) {
     }
 }
 
+// Create the rootSaga generator function
+function* rootSaga() {
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('ADD_MOVIE', addMovie);
+}
+
+
+// Create sagaMiddleware
+const sagaMiddleware = createSagaMiddleware();
+
+
+
+
+
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        detailsReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

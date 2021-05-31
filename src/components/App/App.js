@@ -1,12 +1,21 @@
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import './App.css';
-import bootstrap from 'bootstrap';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
 import AddMovie from '../AddMovie/AddMovie';
 import { NavbarBrand } from 'react-bootstrap';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 
 function App() {
+  console.log('App is rendering');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_MOVIES' })
+  }, []);
+
   return (
     <div className="App">
       <h1>The Movies Saga</h1>
