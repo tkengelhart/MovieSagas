@@ -14,7 +14,7 @@ function Details() {
 
     const movieList = useSelector(store => store.movies);
     const genreList = useSelector(store => store.genres)
-    const details = useSelector(store => store.detailsReducer);
+    // const details = useSelector(store => store.detailsReducer);
 
     const history = useHistory();
 
@@ -22,12 +22,14 @@ function Details() {
     console.log(params);
 
     let movieId = params.movieId; // :id is set up in App.js
-    let genreId = params.genreId
+    // let genreId = params.genreId
 
 
     let movie = movieList.find(movie => movie.id === Number(movieId));
     console.log(params.movieId);
     console.log(`found movie: `, movie);
+
+    let genre = genreList.filter(genre => genre.movie_id === Number(movieId));
 
     useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' });
@@ -55,19 +57,11 @@ function Details() {
 
             <Card.Title>Movie Title: {movie.title}</Card.Title>
             <Card.Body>Description: {movie.description}</Card.Body>
-
-            {genreList.map(genre => {
-
-                return (
-                    <Card className="center-card" style={{ width: '50rem' }} border="light">
+            <Card.Footer key={genre.id}>
+                Genres: {genre.name}
+            </Card.Footer>
 
 
-                        <Card>Genres: {genre.name}</Card>
-
-                    </Card>
-                )
-            })
-            }
             <Button onClick={(event) => backButton()}>Back to Movies</Button>
         </Card>
 
