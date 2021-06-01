@@ -49,26 +49,27 @@ function Details() {
 
 
     return (
-        <Card className="center-card" style={{ width: '50rem' }} border="light">
-            <Card.Header>Movie Details</Card.Header>
+        <>
+            <Card className="center-card" style={{ width: '50rem' }} border="light">
+                <Card.Header>Movie Details</Card.Header>
 
-            <br></br>
-            <br></br>
+                <br></br>
+                <br></br>
 
-            <Card.Title>Movie Title: {movie.title}</Card.Title>
-            <Card.Body>Description: {movie.description}</Card.Body>
+                <Card.Title>Movie Title: {movie.title}</Card.Title>
+                <Card.Body>Description: {movie.description}</Card.Body>
 
-                Genres: {genre.map(genre => {
-                return (
-                    <p>{genre.name}</p>
-                )
-            })
-            }
+                <Card.Footer className="footer">Genres: </Card.Footer>{genre.map(genre => {
+                    return (
+                        <Card.Footer className="footer">{genre.name}</Card.Footer>
+                    )
+                })
+                }
 
 
-            < Button onClick={(event) => backButton()}>Back to Movies</Button>
-        </Card >
-
+                < Button onClick={(event) => backButton()}>Back to Movies</Button>
+            </Card >
+        </>
     );
 }
 

@@ -23,7 +23,7 @@ function AddMovie() {
                 title: title,
                 poster: poster,
                 description: description,
-                genre: genre
+                genre_id: genre
 
             }
         });
