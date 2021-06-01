@@ -57,13 +57,17 @@ function Details() {
 
             <Card.Title>Movie Title: {movie.title}</Card.Title>
             <Card.Body>Description: {movie.description}</Card.Body>
-            <Card.Footer key={genre.id}>
-                Genres: {genre.name}
-            </Card.Footer>
+
+                Genres: {genre.map(genre => {
+                return (
+                    <p>{genre.name}</p>
+                )
+            })
+            }
 
 
-            <Button onClick={(event) => backButton()}>Back to Movies</Button>
-        </Card>
+            < Button onClick={(event) => backButton()}>Back to Movies</Button>
+        </Card >
 
     );
 }
