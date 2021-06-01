@@ -30,14 +30,29 @@ Example Result:
 | Disaster      | 0             |
 ---------------------------------
 
+SELECT "name", COUNT(genre_id) FROM "genres"
+JOIN 
+"movies_genres" 
+ON 
+"genres"."id" = "movies_genres"."genre_id"
+JOIN 
+"movies" 
+ON 
+"movies_genres"."genre_id" = "movies"."id"
+GROUP BY genres.name
+
 
 
 -- 3. Add the genre "Superhero" to "Star Wars".
 
+INSERT INTO "movies_genres" 
+("movie_id", "genre_id") VALUES (10, 13);
+
 
 
 -- 4. Remove the "Comedy" genre from "Titanic"
-
+DELETE FROM "movies_genres"
+WHERE "movies_genres"."genre_id" = 4 AND "movies_genres"."movie_id" = 13;
 
 
 -- Stretch

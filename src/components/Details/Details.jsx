@@ -1,12 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { CardColumns, Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import '../App/App.css';
+import { useEffect } from 'react';
 
 
 function Details() {
+
+    const dispatch = useDispatch();
+
 
     const movieList = useSelector(store => store.movies);
     const genreList = useSelector(store => store.genres)
@@ -24,6 +28,11 @@ function Details() {
     let movie = movieList.find(movie => movie.id === Number(movieId));
     console.log(params.movieId);
     console.log(`found movie: `, movie);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRES' });
+
+    }, []);
 
 
 
