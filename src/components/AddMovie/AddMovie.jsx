@@ -7,7 +7,7 @@ function AddMovie() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [genre, setGenre] = useState('');
+    const [genre, setGenre] = useState(0);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [poster, setPoster] = useState('');

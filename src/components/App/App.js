@@ -13,11 +13,6 @@ function App() {
   console.log('App is rendering');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_MOVIES' });
-    dispatch({ type: 'FETCH_GENRES' });
-
-  }, []);
 
 
   return (

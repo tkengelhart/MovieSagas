@@ -13,36 +13,27 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-// Used to store movies returned from the server
-const movies = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_MOVIES':
-            return action.payload;
-        default:
-            return state;
-    }
+// Create the rootSaga generator function
+function* rootSaga() {
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('FETCH_GENRES', fetchAllGenres);
+    // yield takeEvery('ADD_GENRES', addGenres);
+
 }
 
-// Used to store the movie genres
-const genres = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GENRES':
-            return action.payload;
-        default:
-            return state;
-    }
-}
+
 //example from bookList
 
-const detailsReducer = (state = {}, action) => {
-    // Manages what movie we want to load into the moviedetails page.
-    if (action.type === 'SET_DETAILS') {
-        return action.payload;
-    } else if (action.type === 'CLEAR_DETAILS') {
-        return {} // clears the state back to an empty object
-    }
-    return state;
-}
+// const detailsReducer = (state = {}, action) => {
+//     // Manages what movie we want to load into the moviedetails page.
+//     if (action.type === 'SET_DETAILS') {
+//         return action.payload;
+//     } else if (action.type === 'CLEAR_DETAILS') {
+//         return {} // clears the state back to an empty object
+//     }
+//     return state;
+// }
 
 //sagas
 
@@ -58,17 +49,17 @@ function* fetchAllMovies() {
     }
 }
 
-// function* fetchGenres() {
-//     // get all genres from DB
-//     try {
-//         const genres = yield axios.get('/api/genre');
-//         console.log('get all:', genres.data);
-//         yield put({ type: 'SET_GENRES', payload: genres.data });
+function* fetchAllGenres() {
+    // get all movies from the DB
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('get all:', genres.data);
+        yield put({ type: 'SET_GENRES', payload: genres.data });
 
-//     } catch (error) {
-//         console.log('Error in SET_GENRES', error);
-//     };
-// };
+    } catch {
+        console.log('get all error');
+    }
+}
 
 // // postGenreSaga
 // function* addGenres(action) {
@@ -90,25 +81,38 @@ function* addMovie(action) {
     }
 }
 
-// Create the rootSaga generator function
-function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('ADD_MOVIE', addMovie);
-    // yield takeEvery('FETCH_GENRES', fetchGenres);
-    // yield takeEvery('ADD_GENRES', addGenres);
 
-}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Used to store movies returned from the server
+
+const movies = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_MOVIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// Used to store the movie genres
+const genres = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_GENRES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        detailsReducer
+        // detailsReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

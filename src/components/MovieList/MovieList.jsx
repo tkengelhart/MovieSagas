@@ -10,9 +10,12 @@ function MovieList() {
     const movies = useSelector(store => store.movies);
     // const currentMovie = useSelector(store => store.movies);
 
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_MOVIES' });
-    // }, []);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MOVIES' });
+        dispatch({ type: 'FETCH_GENRES' });
+
+    }, []);
 
     const setMovieDetails = (movie) => {
         dispatch({
